@@ -4,10 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 )
 
 type HookEvent struct {
 	Prompt string `json:"prompt"`
+	Answer string `json:last_assistant_message`
 }
 
 //what gets called when there is a hook.
@@ -33,8 +35,10 @@ func hookHandler() {
 	defer file.Close()
 
 	fmt.Fprintf(file,
-		"This is a test print!\n %s",
-		event.Prompt + "\n",
+		"%s\n%s\n\n%s",
+		time.Now(),
+		event.Prompt,
+		event.Answer,
 	)
 
 	fmt.Println("{}") //tells the hook its done?
