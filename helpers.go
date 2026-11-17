@@ -91,5 +91,7 @@ func createModificationRecord(prompt string) {
 	//TODO: figure out how find which file was modified
 	//might need to force the ai to "fill out a report"
 	//wait im wrong just scrape git diff?
+	//also could use structured events outputed by codex
+	
 		
 }
