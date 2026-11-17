@@ -28,3 +28,16 @@ _User's prompt_
 _Diff of whats changed_
 
 --End of file--
+
+saving for later:
+
+"Stop": [
+{
+"hooks": [
+{
+"type": "command",
+"command": "C:\\projects\\Prompt-Tracker\\prompt-tracker.exe"
+}
+]
+}
+]

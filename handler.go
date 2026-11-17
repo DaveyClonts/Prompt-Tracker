@@ -24,16 +24,16 @@ type HookEvent struct {
 func hookHandler() {
 	var event HookEvent
 
-	fmt.Println("Made it here")
-
 	error := json.NewDecoder(os.Stdin).Decode(&event)
 	if error != nil {
 		fmt.Fprintln(os.Stderr, error)
 		os.Exit(1)
 	}
 
-	//check vault if ledger files is up to date
+	//checks and updates ledger files
 	updateLedgerFiles()
+
+	createModificationRecord(event.Prompt)
 
 	file, error := os.OpenFile(
 		"C:/projects/Prompt-Tracker/TestFile.md",
@@ -47,10 +47,9 @@ func hookHandler() {
 	defer file.Close()
 
 	_, error = fmt.Fprintf(file,
-		"%s\n%s\n\n%s",
+		"\n%s\n%s\n\n",
 		time.Now(),
 		event.Prompt,
-		event.Answer,
 	)
 	if error != nil {
 		fmt.Fprintln(os.Stderr, error)
