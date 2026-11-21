@@ -59,12 +59,14 @@ func createModificationRecord(prompt string) {
 
 	//create a modification file
 	//timestamp and prompt in that modfication file
+	//git diff in mod file?
 	//link in ledger to modificaiton file
 	//assess the situation
 
-	//TODO: rewrite to use create to name file
+
+	modName := "Mod: " + time.Now().Format("2004-04-30 15:04:05")
 	modFile, err := os.OpenFile(
-		filepath.Join(PROJECT_FOLDER, "Test"),
+		filepath.Join(PROJECT_FOLDER, "Test", modName),
 		os.O_CREATE|os.O_APPEND|os.O_WRONLY,
 		0640,
 	)
@@ -81,6 +83,9 @@ func createModificationRecord(prompt string) {
 		prompt,
 	)
 
+
+	//TODO: ADD DIFF
+
 	//find relevant ledger
 	vaultFileList, error := os.ReadDir(vaultDir)
 	if error != nil {
@@ -89,9 +94,9 @@ func createModificationRecord(prompt string) {
 	} //reused code... TODO: find better solution
 
 	//TODO: figure out how find which file was modified
-	//might need to force the ai to "fill out a report"
-	//wait im wrong just scrape git diff?
-	//also could use structured events outputed by codex
+	//decided on git diff
+
+	//need to find a path for starting a diff before changes and after
 	
-		
+	
 }

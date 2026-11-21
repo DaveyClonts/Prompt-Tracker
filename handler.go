@@ -35,6 +35,7 @@ func hookHandler() {
 
 	createModificationRecord(event.Prompt)
 
+	//TEMP
 	file, error := os.OpenFile(
 		"C:/projects/Prompt-Tracker/TestFile.md",
 		os.O_CREATE|os.O_APPEND|os.O_WRONLY,
@@ -55,6 +56,7 @@ func hookHandler() {
 		fmt.Fprintln(os.Stderr, error)
 		os.Exit(1)
 	}
+	//TEMP END
 
 	fmt.Println("{}") //tells the hook its done?
 }
