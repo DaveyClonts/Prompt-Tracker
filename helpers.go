@@ -86,17 +86,14 @@ func createModificationRecord(prompt string) {
 
 	//TODO: ADD DIFF
 
-	//find relevant ledger
-	vaultFileList, error := os.ReadDir(vaultDir)
-	if error != nil {
-		fmt.Fprintln(os.Stderr, error)
-		os.Exit(1)
-	} //reused code... TODO: find better solution
-
 	//TODO: figure out how find which file was modified
-	//decided on git diff
 
 	//need to find a path for starting a diff before changes and after
+	//userpromptsubmit should clear the git log somehow
+		//TODO: figure out how clear like i wanted
+	//then ai does the change
+	//after a git diff is fired
+		//TODO: figure out how to sort through data and what to store
 	
 	
 }
