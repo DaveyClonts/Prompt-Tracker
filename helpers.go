@@ -8,12 +8,12 @@ import (
 )
 
 const LANG = ".go" //the file type being used by your project, used to enforce ledger files
-const PROJECT_FOLDER = `C:/projects/Prompt-Tracker`
 
 //Im going to make this specific for my use. I can rewrite these to make them more flexible if wanted
 //Checks if ledger files are up to date, and if not updates them
+//TODO: make it rename when file name changes
 func updateLedgerFiles() {
-	vaultDir := filepath.Join(PROJECT_FOLDER, "Test")
+	vaultDir := filepath.Join(DIR_PATH, "Test")
 
 	vaultFileList, error := os.ReadDir(vaultDir)
 	if error != nil {
@@ -21,7 +21,7 @@ func updateLedgerFiles() {
 		os.Exit(1)
 	}
 
-	targetFileList, error := os.ReadDir(PROJECT_FOLDER)
+	targetFileList, error := os.ReadDir(DIR_PATH)
 	if error != nil {
 		fmt.Fprintln(os.Stderr, error)
 		os.Exit(1)
@@ -53,7 +53,7 @@ func updateLedgerFiles() {
 	}
 }
 
-func createModificationRecord(prompt string) {
+func createModificationRecord(event HookEvent) {
 	//ledger file gets a link to a modificaiton
 	//a modification gets the info
 
@@ -68,9 +68,10 @@ func createModificationRecord(prompt string) {
 	//assess the situation
 
 
+	//TODO: check if this mod already exists 
 	modName := "Mod: " + time.Now().Format("2004-04-30 15:04:05")
 	modFile, err := os.OpenFile(
-		filepath.Join(PROJECT_FOLDER, "Test", modName),
+		filepath.Join(DIR_PATH, "Test", modName),
 		os.O_CREATE|os.O_APPEND|os.O_WRONLY,
 		0640,
 	)
@@ -84,7 +85,7 @@ func createModificationRecord(prompt string) {
 		modFile,
 		`------------------\n%s\n%s\n\`,
 		time.Now(),
-		prompt,
+		event.Prompt,
 	)
 
 
@@ -92,22 +93,27 @@ func createModificationRecord(prompt string) {
 
 	//TODO: figure out specifics on which indvidual files were modified so that diff can be stored
 
-	beforeSnapshot, err := takeSnapshot(PROJECT_FOLDER)
-	if err != nil {
-		fmt.Println(os.Stderr, err)
-		os.Exit(1)
+	//TODO: need to redo some code so that this info gets stored
+	//prob move out....
+	if (event.HookEventName == "UserPromptSubmit") {
+		beforeSnapshot, err := takeSnapshot(DIR_PATH)
+		if err != nil {
+			fmt.Println(os.Stderr, err)
+			os.Exit(1)
+		}
 	}
 
-	//let ai run?
-	//TODO: uh oh figure that out
+
+
+	if (event.HookEventName == "Stop") {
+		afterSnapshot, err := takeSnapshot(DIR_PATH)
+		if err != nil {
+			fmt.Println(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
+}
+
+func trackChanges() {
 	
-	afterSnapshot, err := takeSnapshot(PROJECT_FOLDER)
-	if err != nil {
-		fmt.Println(os.Stderr, err)
-		os.Exit(1)
-	}
-
-
-
-
 }

@@ -170,3 +170,18 @@ what is the error on line 51 talking about
 read only please. in snapshots.go im trying to do a partial application, whats wrong with it
 
 
+
+2026-11-23 11:06:12.5960516 -0600 CST m=+0.002002301
+Read only. Take a look at helpers.go lines 95 and 105. Would this be ansycronous and how do i do that in GO
+
+
+
+2026-11-23 11:11:54.1708299 -0600 CST m=+0.001004501
+Well now im wondering if theres a problem with my code. createModficationRecord holds a HookEvent, but needs to preform actions for both the UserPromptSubmit and Stop hook...
+
+
+
+2026-11-23 11:15:41.5784187 -0600 CST m=+0.001007101
+So this means i also need to make this code persistent so that I can store snapshot for before and after?
+
+
