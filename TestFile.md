@@ -160,3 +160,13 @@ Build me a custom wordpress theme according to that theme. If you find inconsist
 2026-11-19 14:21:01.9687751 -0600 CST m=+0.001506101
 what do i need to do now
 
+
+2026-11-23 00:50:06.3854788 -0600 CST m=+0.002503701
+what is the error on line 51 talking about
+
+
+
+2026-11-23 01:21:06.4765798 -0600 CST m=+0.001690701
+read only please. in snapshots.go im trying to do a partial application, whats wrong with it
+
+

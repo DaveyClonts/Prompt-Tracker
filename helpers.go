@@ -59,7 +59,11 @@ func createModificationRecord(prompt string) {
 
 	//create a modification file
 	//timestamp and prompt in that modfication file
-	//git diff in mod file?
+	//create a snapshot (tree ID) of project before AI changes
+	//AI modifies
+	//take second snapshot
+	//run a diff against second snapshot to original snapshot
+	//store diff in modification file
 	//link in ledger to modificaiton file
 	//assess the situation
 
@@ -84,16 +88,26 @@ func createModificationRecord(prompt string) {
 	)
 
 
-	//TODO: ADD DIFF
+	//TODO: DIFF LOGIC
 
-	//TODO: figure out how find which file was modified
+	//TODO: figure out specifics on which indvidual files were modified so that diff can be stored
 
-	//need to find a path for starting a diff before changes and after
-	//userpromptsubmit should clear the git log somehow
-		//TODO: figure out how clear like i wanted
-	//then ai does the change
-	//after a git diff is fired
-		//TODO: figure out how to sort through data and what to store
+	beforeSnapshot, err := takeSnapshot(PROJECT_FOLDER)
+	if err != nil {
+		fmt.Println(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	//let ai run?
+	//TODO: uh oh figure that out
 	
-	
+	afterSnapshot, err := takeSnapshot(PROJECT_FOLDER)
+	if err != nil {
+		fmt.Println(os.Stderr, err)
+		os.Exit(1)
+	}
+
+
+
+
 }
